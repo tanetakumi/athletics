@@ -88,7 +88,7 @@ public class SQLite {
             stmtForGet.clearParameters();
             stmtForGet.setString(1,key);
             ResultSet rs = stmtForGet.executeQuery();
-            String data = "";
+            String data = null;
             if ( rs.next() ) {
                 data = rs.getString("data");
             }
