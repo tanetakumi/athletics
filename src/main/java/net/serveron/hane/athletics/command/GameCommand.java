@@ -2,9 +2,6 @@ package net.serveron.hane.athletics.command;
 
 import net.kyori.adventure.text.Component;
 import net.serveron.hane.athletics.Athletics;
-import net.serveron.hane.haneserverlobby.HaneServerLobby;
-import net.serveron.hane.haneserverlobby.util.ColorSearch;
-import net.serveron.hane.haneserverlobby.util.PlayerSearch;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 

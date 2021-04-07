@@ -5,16 +5,16 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AthleticCalc {
+public class Calculator {
 
     static class StopWatch {
         private final String playerName;
-        private final int startTime;
+        private final double startTime;
         private final String athleticName;
 
         public StopWatch(String playerName, String athleticName){
             this.playerName = playerName;
-            this.startTime = (int)System.currentTimeMillis()/1000;
+            this.startTime = (double)System.currentTimeMillis()/1000;
             this.athleticName = athleticName;
         }
 
@@ -22,7 +22,7 @@ public class AthleticCalc {
             return playerName;
         }
 
-        public int getStartTime() {
+        public double getStartTime() {
             return startTime;
         }
 
@@ -43,12 +43,12 @@ public class AthleticCalc {
         calcList.add(new StopWatch(player.getName(),athleticName));
     }
 
-    public static int getPlayerTime(Player player,String athleticName){
-        int finishTime = (int)System.currentTimeMillis()/1000;
+    public static double getPlayerTime(Player player,String athleticName){
+        double finishTime = (double)System.currentTimeMillis()/1000;
 
         for(StopWatch stopWatch: calcList){
             if(stopWatch.getPlayerName().equals(player.getName()) && stopWatch.getAthleticName().equals(athleticName)){
-                int startTime = stopWatch.getStartTime();
+                double startTime = stopWatch.getStartTime();
                 calcList.remove(stopWatch);
                 return finishTime - startTime;
             }
