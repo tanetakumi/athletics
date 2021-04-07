@@ -1,0 +1,4 @@
+name: Athletics
+version: ${project.version}
+main: net.serveron.hane.athletics.Athletics
+api-version: 1.16
