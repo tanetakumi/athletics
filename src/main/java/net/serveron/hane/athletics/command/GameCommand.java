@@ -61,8 +61,7 @@ public class GameCommand implements CommandExecutor, TabCompleter {
                 autoComplete.addAll(Arrays.asList("start","stop","show","save"));
             }
         }
-        //文字比較と削除-----------------------------------------------------
-        //Collections.sort(autoComplete);
+        //文字比較と削除-------------------------------------------
         autoComplete.removeIf(str -> !str.startsWith(args[args.length - 1]));
         //------------------------------------------------------
         return autoComplete;

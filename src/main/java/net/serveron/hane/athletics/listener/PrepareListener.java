@@ -4,14 +4,10 @@ package net.serveron.hane.athletics.listener;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
 import net.serveron.hane.athletics.Athletics;
+import net.serveron.hane.athletics.config.TeleportStructure;
 import net.serveron.hane.athletics.util.ColorSearch;
-import net.serveron.hane.haneserverlobby.HaneServerLobby;
-import net.serveron.hane.haneserverlobby.util.ColorSearch;
-import net.serveron.hane.haneserverlobby.util.ItemManager;
-import net.serveron.hane.haneserverlobby.util.TeleportStructure;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -56,9 +52,9 @@ public class PrepareListener implements Listener {
         }
     }
 
-    public TeleportStructure getLocationStructure(String name){
+    public TeleportStructure getTeleportStructure(String name){
         if(loc1!=null && loc2!=null){
-            return new TeleportStructure(targetPlayer.getLocation(),loc1,loc2);
+            return new TeleportStructure(name,targetPlayer.getLocation(),loc1,loc2);
         } else {
             return null;
         }

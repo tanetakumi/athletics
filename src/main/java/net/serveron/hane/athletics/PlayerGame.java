@@ -41,21 +41,21 @@ public class PlayerGame {
 
     public int onFish(Player player){
         Optional<PlayerData> opd = players.stream().filter(p -> p.getUuid().equals(player.getUniqueId().toString())).findFirst();
+        int fishCount = 0;
         if(opd.isPresent()){
             PlayerData playerData = opd.get();
             String strFishCount = playerData.getValue("fish");
             if(strFishCount==null){
                 playerData.setValue("fish",String.valueOf(1));
             } else {
-                int fishCount = stringToInt(strFishCount);
+                fishCount = stringToInt(strFishCount);
                 if(fishCount>0){
                     fishCount++;
                 }
                 playerData.setValue("fish",String.valueOf(fishCount));
             }
-
         }
-        return opd.get().getFishing();
+        return fishCount;
     }
 
     public void onCompleteAthletic(Player player,String athleticName){
@@ -87,6 +87,7 @@ public class PlayerGame {
     public void showPlayerData(Player player){
         Optional<PlayerData> optionalPlayerData = players.stream()
                 .filter(p -> p.getUuid().equals(player.getUniqueId().toString())).findFirst();
+
         if(optionalPlayerData.isPresent()){
             player.sendMessage(Component.text(optionalPlayerData.get().showStringData()).color(ColorSearch.Aqua));
         } else {
@@ -98,6 +99,7 @@ public class PlayerGame {
     public boolean savePlayerData(Player player){
         Optional<PlayerData> optionalPlayerData = players.stream()
                 .filter(p -> p.getUuid().equals(player.getUniqueId().toString())).findFirst();
+
         if(optionalPlayerData.isPresent()){
             plugin.runAsyncSetPlayerData(optionalPlayerData.get());
             return true;
@@ -107,7 +109,8 @@ public class PlayerGame {
     }
 
     public void playerQuit(Player player){
-        Optional<PlayerData> opd = players.stream().filter(p -> p.getUuid().equals(player.getUniqueId().toString())).findFirst();
+        Optional<PlayerData> opd = players.stream()
+                .filter(p -> p.getUuid().equals(player.getUniqueId().toString())).findFirst();
         opd.ifPresent(plugin::runAsyncSetPlayerData);
         players.removeIf(p -> p.getUuid().equals(player.getUniqueId().toString()));
     }
