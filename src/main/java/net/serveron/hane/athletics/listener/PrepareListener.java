@@ -3,36 +3,37 @@ package net.serveron.hane.athletics.listener;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
+import net.serveron.hane.athletics.Athletics;
+import net.serveron.hane.athletics.util.ColorSearch;
 import net.serveron.hane.haneserverlobby.HaneServerLobby;
 import net.serveron.hane.haneserverlobby.util.ColorSearch;
 import net.serveron.hane.haneserverlobby.util.ItemManager;
 import net.serveron.hane.haneserverlobby.util.TeleportStructure;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class PrepareListener implements Listener {
 
-    //前もってストラクチャ―を作成しておき、sortを使わず処理する。
-    //X -> Z -> Y　の順で処理することで高速化
-    //Mall以外の処理ができるように一応Listにしておくが速度を上げるにはリストはないほうが良い。
-
     //Kyori adventure を使用していきたい。
-    private final HaneServerLobby plugin;
+    private final Athletics plugin;
     private final Player targetPlayer;
 
     private Location loc1;
     private Location loc2;
 
-    public PrepareListener(HaneServerLobby plugin, Player player){
+    public PrepareListener(Athletics plugin, Player player){
         this.plugin = plugin;
         this.targetPlayer = player;
-        ItemManager.setPrepareStick(player,0,"Location1");
-        ItemManager.setPrepareStick(player,1,"Location2");
+        player.getInventory().setItem(0,getNamedStick("Location1"));
+        player.getInventory().setItem(1,getNamedStick("Location2"));
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
@@ -61,6 +62,14 @@ public class PrepareListener implements Listener {
         } else {
             return null;
         }
+    }
+
+    private ItemStack getNamedStick(String name){
+        ItemStack itemStack = new ItemStack(Material.STICK,1);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.displayName(Component.text(name).color(ColorSearch.Gold));
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
     }
 
     public void deInit(){

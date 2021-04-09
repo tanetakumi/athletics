@@ -2,6 +2,7 @@ package net.serveron.hane.athletics.command;
 
 import net.kyori.adventure.text.Component;
 import net.serveron.hane.athletics.Athletics;
+import net.serveron.hane.athletics.util.ColorSearch;
 import net.serveron.hane.athletics.util.PlayerSearch;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -49,7 +50,6 @@ public class GameCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(Component.text("引数が違います。"));
             }
         }
-
         return true;
     }
 

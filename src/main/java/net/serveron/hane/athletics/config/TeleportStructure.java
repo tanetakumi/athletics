@@ -4,7 +4,7 @@ import org.bukkit.Location;
 
 public class TeleportStructure {
 
-    private Location teleportLocation;
+    private final Location teleportLocation;
     private final int lowX;
     private final int highX;
     private final int lowY;

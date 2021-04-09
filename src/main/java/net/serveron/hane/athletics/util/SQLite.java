@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 
-public class SQLite {
+public class SQLite{
+
     private final File dataBaseFile;
     public static Connection connection;
     private PreparedStatement stmtForGet;
     private PreparedStatement stmtForSet;
     private PreparedStatement stmtForDelete;
     private final String tableName;
+
 
     public SQLite(File pluginDataFolder, String dbname, String tableName){
         File dataBaseFile = new File(pluginDataFolder, dbname+".db");
@@ -26,7 +28,7 @@ public class SQLite {
         }
     }
 
-    public boolean openConnection(){
+    public void openConnection(){
         try{
             if (connection != null && !connection.isClosed()) {
                 throw new IllegalStateException();
@@ -52,14 +54,11 @@ public class SQLite {
                 stmtForDelete = connection.prepareStatement("DELETE FROM "+tableName+" WHERE uuid = ?;");
             }
             System.out.println("[SQLite] 正常に接続できました。");
-            return true;
         } catch(SQLException | ClassNotFoundException e){
             System.out.println("[SQLite] 正常に接続できませんでした。");
             e.printStackTrace();
-            return false;
         } catch (IllegalStateException e){
             System.out.println("[SQLite] なぜかすでに接続があります。");
-            return false;
         }
 
     }
@@ -86,7 +85,7 @@ public class SQLite {
             stmtForGet.clearParameters();
             stmtForGet.setString(1,key);
             ResultSet rs = stmtForGet.executeQuery();
-            String data = "";
+            String data = null;
             if ( rs.next() ) {
                 data = rs.getString("data");
             }

@@ -34,12 +34,7 @@ public class Calculator {
     private static final List<StopWatch> calcList = new ArrayList<>();
 
     public static void playerStart(Player player,String athleticName){
-        for(StopWatch stopWatch: calcList){
-            if(stopWatch.getPlayerName().equals(player.getName())){
-                calcList.remove(stopWatch);
-                break;
-            }
-        }
+        calcList.removeIf(l -> l.getPlayerName().equals(player.getName()));
         calcList.add(new StopWatch(player.getName(),athleticName));
     }
 
