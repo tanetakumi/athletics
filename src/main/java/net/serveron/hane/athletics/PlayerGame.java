@@ -3,6 +3,7 @@ package net.serveron.hane.athletics;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextColor;
+import net.serveron.hane.athletics.util.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -11,12 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class PlayerGame {
-    private final HaneServerLobby plugin;
-    private final List<AthleticData> ranking = new ArrayList<>();
+    private final Athletics plugin;
     private final List<PlayerData> players = new ArrayList<>();
-    private final AthleticCalc athleticCalc = new AthleticCalc();
 
-    public PlayerGame(HaneServerLobby plugin){
+
+    public PlayerGame(Athletics plugin){
         this.plugin = plugin;
         for(Player player : Bukkit.getOnlinePlayers()){
             playerJoin(player);
@@ -24,12 +24,12 @@ public class PlayerGame {
     }
 
     public void playerJoin(Player player){
-        PlayerData playerData = plugin.getSqLite().getPlayerData(player.getUniqueId().toString());
-        if(playerData==null){
+        String data = plugin.getSqLite().getData(player.getUniqueId().toString());
+        if(data==null){
             players.add(new PlayerData(player.getUniqueId().toString(),player.getName(),0,6000,6000,6000,0,0,0));
         } else {
             if(!players.contains(playerData)){
-                players.add(playerData);
+                players.add(new PlayerData(player.getUniqueId().toString(),"");
             }
         }
     }

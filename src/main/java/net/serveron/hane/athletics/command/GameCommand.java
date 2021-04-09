@@ -2,6 +2,7 @@ package net.serveron.hane.athletics.command;
 
 import net.kyori.adventure.text.Component;
 import net.serveron.hane.athletics.Athletics;
+import net.serveron.hane.athletics.util.PlayerSearch;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 

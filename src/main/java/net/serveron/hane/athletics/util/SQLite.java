@@ -1,7 +1,5 @@
 package net.serveron.hane.athletics.util;
 
-import net.serveron.hane.athletics.Athletics;
-
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
